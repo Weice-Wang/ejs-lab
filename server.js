@@ -67,6 +67,19 @@ app.get("/menu", (req, res) => {
   });
 });
 
+app.get("/menu/:category", (req, res) => {
+  console.log(req.params.category);
+  const categoryStr = req.params.category;
+  const categoryName =
+    categoryStr.charAt(0).toUpperCase() + categoryStr.slice(1);
+
+  const menuItems = RESTAURANT.menu.filter(
+    (item) => item.category === req.params.category
+  );
+  console.log(menuItems);
+  res.render("category.ejs", { categoryName, menuItems });
+});
+//
 app.listen(3000, () => {
   console.log("Listening on port 3000");
 });
